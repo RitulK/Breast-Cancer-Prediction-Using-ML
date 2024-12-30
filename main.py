@@ -58,15 +58,14 @@ def cancerPrediction():
     new_df = pd.DataFrame(data, columns = ['texture_mean', 'perimeter_mean', 'smoothness_mean', 'compactness_mean', 'symmetry_mean'])
     single = model.predict(new_df)
     probability = model.predict_proba(new_df)[:,1]
-    probability = probability[0]
     print("Probability for diagnosis (class 1):", probability)
-    
+
     if single==1:
         output = "The patient is diagnosed with Breast Cancer"
         output1 = "Confidence: {:.2f}%".format(probability*100)
     else:
         output = "The patient is not diagnosed with Breast Cancer"
-        output1 = "Confidence: {:.2f}%".format(probability*100)
+        output1 = ""
     
     return render_template('home.html', output1=output, output2=output1, query1 = request.form['query1'], query2 = request.form['query2'],query3 = request.form['query3'],query4 = request.form['query4'],query5 = request.form['query5'])
     
